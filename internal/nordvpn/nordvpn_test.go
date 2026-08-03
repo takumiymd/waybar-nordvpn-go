@@ -5,8 +5,10 @@ import (
 	"testing"
 )
 
+// updateBanner simulates the update notification banner output by the NordVPN CLI.
 const updateBanner = "A new version of NordVPN is available!\nPlease update the app.\n"
 
+// TestParseConnected tests parsing a successful connection status output.
 func TestParseConnected(t *testing.T) {
 	raw := updateBanner + `Status: Connected
 Hostname: jp123.nordvpn.com
@@ -31,6 +33,7 @@ Current protocol: NORDLYNX
 	}
 }
 
+// TestParseDisconnected tests parsing a disconnected status output.
 func TestParseDisconnected(t *testing.T) {
 	got := Parse(updateBanner + "Status: Disconnected\n")
 	if got.State != StateDisconnected {
@@ -38,6 +41,7 @@ func TestParseDisconnected(t *testing.T) {
 	}
 }
 
+// TestParseUnparseable tests parsing of unrecognized or malformed CLI output.
 func TestParseUnparseable(t *testing.T) {
 	got := Parse("some unexpected error text\n")
 	if got.State != StateError {
@@ -48,6 +52,7 @@ func TestParseUnparseable(t *testing.T) {
 	}
 }
 
+// TestQueryUnavailable tests Query behavior when the nordvpn binary is not in PATH.
 func TestQueryUnavailable(t *testing.T) {
 	orig := lookPath
 	defer func() { lookPath = orig }()
@@ -58,6 +63,7 @@ func TestQueryUnavailable(t *testing.T) {
 	}
 }
 
+// TestQueryParsesRunner tests Query when the CLI runs successfully and returns status.
 func TestQueryParsesRunner(t *testing.T) {
 	origLook, origRun := lookPath, runStatus
 	defer func() { lookPath, runStatus = origLook, origRun }()

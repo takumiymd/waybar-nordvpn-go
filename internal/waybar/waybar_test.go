@@ -7,6 +7,7 @@ import (
 	"github.com/takumiymd/waybar-nordvpn-go/internal/nordvpn"
 )
 
+// TestFromStatusConnected tests that FromStatus maps a connected state to correct text and tooltip.
 func TestFromStatusConnected(t *testing.T) {
 	out := FromStatus(nordvpn.Status{
 		State:    nordvpn.StateConnected,
@@ -26,6 +27,7 @@ func TestFromStatusConnected(t *testing.T) {
 	}
 }
 
+// TestFromStatusDisconnected tests that FromStatus maps a disconnected state to correct text and tooltip.
 func TestFromStatusDisconnected(t *testing.T) {
 	out := FromStatus(nordvpn.Status{State: nordvpn.StateDisconnected})
 	if out.Text != "VPN: down" || out.Class != "disconnected" {
@@ -36,6 +38,7 @@ func TestFromStatusDisconnected(t *testing.T) {
 	}
 }
 
+// TestFromStatusUnavailable tests that FromStatus maps an unavailable CLI state to an error.
 func TestFromStatusUnavailable(t *testing.T) {
 	out := FromStatus(nordvpn.Status{State: nordvpn.StateUnavailable})
 	if out.Class != "error" || !strings.Contains(out.Tooltip, "not found") {
@@ -43,6 +46,7 @@ func TestFromStatusUnavailable(t *testing.T) {
 	}
 }
 
+// TestFromStatusError tests that FromStatus maps a parsing error state to an error with raw details
 func TestFromStatusError(t *testing.T) {
 	out := FromStatus(nordvpn.Status{State: nordvpn.StateError, Raw: "boom"})
 	if out.Text != "VPN: !!" || out.Class != "error" {
@@ -53,6 +57,7 @@ func TestFromStatusError(t *testing.T) {
 	}
 }
 
+// TestEmitIsSingleJSONLineFieldOrder tests that Output serialization is single-line JSON.
 func TestEmitIsSingleJSONLineFieldOrder(t *testing.T) {
 	var b strings.Builder
 	if err := (Output{Text: "t", Class: "c", Tooltip: "tt"}).Emit(&b); err != nil {
