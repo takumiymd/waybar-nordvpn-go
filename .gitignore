@@ -1,0 +1,8 @@
+/waybar-nordvpn
+/dist/
+
+*.test
+*.out
+coverage.*
+
+*.swp
