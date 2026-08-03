@@ -1,5 +1,4 @@
-// Command waybar-nordvpn queries the NordVPN CLI once
-// and prints a single waybar JSON status line describing the current VPN connection.
+// Command waybar-nordvpn queries the NordVPN CLI once and prints a single waybar JSON status line describing the current VPN connection.
 // waybar runs the binary on an interval and it emits one JSON object and exits.
 package main
 

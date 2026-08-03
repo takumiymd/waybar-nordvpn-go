@@ -16,7 +16,7 @@ const (
 	StateError
 )
 
-// Status is the parsed result of a single "nordvpn status" invocation
+// Status is the parsed result of a single "nordvpn status" invocation.
 type Status struct {
 	State    State
 	Country  string
@@ -33,7 +33,7 @@ var (
 	runStatus = defaultRunStatus
 )
 
-// defaultRunStatus executes "nordvpn status" and returns its combined output
+// defaultRunStatus executes "nordvpn status" and returns its combined output.
 func defaultRunStatus() string {
 	out, _ := exec.Command(binary, "status").CombinedOutput()
 	return string(out)

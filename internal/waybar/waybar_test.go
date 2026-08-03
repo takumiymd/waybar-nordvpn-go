@@ -46,7 +46,7 @@ func TestFromStatusUnavailable(t *testing.T) {
 	}
 }
 
-// TestFromStatusError tests that FromStatus maps a parsing error state to an error with raw details
+// TestFromStatusError tests that FromStatus maps a parsing error state to an error with raw details.
 func TestFromStatusError(t *testing.T) {
 	out := FromStatus(nordvpn.Status{State: nordvpn.StateError, Raw: "boom"})
 	if out.Text != "VPN: !!" || out.Class != "error" {

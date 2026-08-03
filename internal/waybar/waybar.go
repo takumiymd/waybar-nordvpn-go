@@ -1,4 +1,4 @@
-// Package waybar maps a parsed NordVPN status into the JSON document that Waybar's custom module protocol expects
+// Package waybar maps a parsed NordVPN status into the JSON document that Waybar's custom module protocol expects.
 package waybar
 
 import (
@@ -14,14 +14,14 @@ const (
 	errorMark = "!!"
 )
 
-// Output is the JSON object Waybar reads from a custom module
+// Output is the JSON object Waybar reads from a custom module.
 type Output struct {
 	Text    string `json:"text"`
 	Class   string `json:"class"`
 	Tooltip string `json:"tooltip"`
 }
 
-// FromStatus maps a parsed NordVPN status to a Waybar output line
+// FromStatus maps a parsed NordVPN status to a Waybar output line.
 func FromStatus(s nordvpn.Status) Output {
 	switch s.State {
 	case nordvpn.StateConnected:
@@ -53,7 +53,7 @@ func FromStatus(s nordvpn.Status) Output {
 	}
 }
 
-// Emit encodes the output as a single JSON line to w. HTML escaping is disabled so characters such as <, > and & survive verbatim
+// Emit encodes the output as a single JSON line to w. HTML escaping is disabled so characters such as <, > and & survive verbatim.
 func (o Output) Emit(w io.Writer) error {
 	enc := json.NewEncoder(w)
 	enc.SetEscapeHTML(false)
